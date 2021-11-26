@@ -3,6 +3,8 @@ import ButtonWhite from "@src/components/common/ButtonWhite";
 import TitleCate from "@src/components/common/TitleCate";
 import SwiperProductImage from "@src/components/common/SwiperProductImage";
 import axios from "@src/config/axios";
+import axiosIndex from "axios";
+
 import Image from "next/image";
 import { serverApi, qualityImage, limit_evaluate_in_product_details, limit_comment_in_product_details } from "@src/config/constrant";
 import Dropdown from "@src/components/common/Dropdown";
@@ -532,6 +534,23 @@ function LinkProduct({ data, PAGE_OF_EVALUATE, PAGE_OF_COMMENT }) {
 	const dispatch = useAppDispatch();
 	const productsViewedState = useAppSelector(state => state.product.productsViewed);
 	// cập nhật lượt xem
+	useEffect(() => {
+		const cancelTokenSource = axiosIndex.CancelToken.source();
+		const updateViews = async () => {
+			try {
+				await axios.post(
+					"/api/productAddview",
+					{ Id_Product: Id_Product },
+					{
+						cancelToken: cancelTokenSource.token,
+					}
+				);
+			} catch (error) {}
+		};
+		return () => {
+			cancelTokenSource.cancel();
+		};
+	}, []);
 	// sản phẩm đã xem
 	useEffect(() => {
 		try {
