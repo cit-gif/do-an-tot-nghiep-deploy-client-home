@@ -12,7 +12,7 @@ export default function Home({ data }) {
 	const { check, bestsellingPhone, newestPhone, newestTablet, newestPost } = data;
 	// chia bài viết mới thành 2 danh sách
 	// 3 tin đầu tiên là của cột bên phải
-	const newestPostSlice = newestPost[0]?.data?.reduce(
+	const newestPostSlice = newestPost?.[0]?.data?.reduce(
 		(prev, current, index) => {
 			if (index < 3) {
 				prev[0].push(current);
