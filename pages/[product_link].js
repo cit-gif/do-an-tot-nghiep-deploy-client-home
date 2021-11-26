@@ -19,6 +19,7 @@ import Modal from "@src/components/common/Modal";
 import ButtonColorMain from "@src/components/common/ButtonColorMain";
 const query_pageEvaluate = "pageEvaluate";
 const query_pageComment = "pageComment";
+import Head from "next/head";
 import { getCookie } from "@src/helper/helpCookie";
 import classnames from "classnames";
 import { useSnackbar } from "notistack";
@@ -643,73 +644,77 @@ function LinkProduct({ data, PAGE_OF_EVALUATE, PAGE_OF_COMMENT }) {
 		}
 	};
 	return (
-		<main className="container mx-auto">
-			<section className="my-16 xs:my-12 flex flex-wrap w-full">
-				<div className={`${cssSectionTop.left}`}>
-					<div className="w-full sticky top-0">
-						<HeaderProduct Star={Star} css="hidden invisible xs:block xs:visible" ProductName={ProductName} CountEvaluate={evaluate.MetaData[0]?.CountEvaluate} CountComment={comment.MetaData[0]?.CountComment} />
-						<SwiperProductImage images={images} />
-					</div>
-				</div>
-				<div className={`${cssSectionTop.center}`}>
-					<div className="flex flex-col pl-12 pr-1 xs:px-1 space-y-2 xs:space-y-1">
-						<div className="flex items-center">
-							<span className="text-sm mr-2 font-bold">Tình trạng:</span>
-							<span className={classnames("text-lg font-bold", { "text-green-600": RemainingAmount > 0 }, { "text-gray-600": RemainingAmount <= 0 })}>{RemainingAmount > 0 ? "Còn hàng" : "Tạm hết hàng"}</span>
+		<>
+			<Head>
+				<title>{ProductName}</title>
+			</Head>
+			<main className="container mx-auto">
+				<section className="my-16 xs:my-12 flex flex-wrap w-full">
+					<div className={`${cssSectionTop.left}`}>
+						<div className="w-full sticky top-0">
+							<HeaderProduct Star={Star} css="hidden invisible xs:block xs:visible" ProductName={ProductName} CountEvaluate={evaluate.MetaData[0]?.CountEvaluate} CountComment={comment.MetaData[0]?.CountComment} />
+							<SwiperProductImage images={images} />
 						</div>
-						{PriceSale > 0 ? (
-							<>
-								<div className="flex items-center">
-									<span className="text-sm mr-2 font-bold">Giá khuyến mại:</span>
-									<span className="font-semibold text-red-400 text-lg">{FormatCurency(PriceSale)}</span>
-								</div>
-								<div className="flex items-center">
-									<span className="text-sm mr-2 font-bold">Giá niêm yết:</span>
-									<span className="line-through font-semibold">{FormatCurency(Price)}</span>
-								</div>
-								<span className="text-green-600 font-semibold">Tiết kiệm {FormatCurency(Price - PriceSale)} so với thị trường!</span>
-							</>
-						) : (
+					</div>
+					<div className={`${cssSectionTop.center}`}>
+						<div className="flex flex-col pl-12 pr-1 xs:px-1 space-y-2 xs:space-y-1">
 							<div className="flex items-center">
-								<span className="text-sm mr-2 font-bold">Giá :</span>
-								<span className="font-semibold text-red-400 text-lg">{FormatCurency(Price)}</span>
+								<span className="text-sm mr-2 font-bold">Tình trạng:</span>
+								<span className={classnames("text-lg font-bold", { "text-green-600": RemainingAmount > 0 }, { "text-gray-600": RemainingAmount <= 0 })}>{RemainingAmount > 0 ? "Còn hàng" : "Tạm hết hàng"}</span>
 							</div>
-						)}
-						<div className="w-10/12 xs:mt-6">
-							<ButtonColorMain disabled={RemainingAmount <= 0} rounded="rounded-lg" padding="px-8 py-2 h-12 mt-6" onClick={handle_add_cart}>
-								Thêm vào giỏ hàng
-							</ButtonColorMain>
+							{PriceSale > 0 ? (
+								<>
+									<div className="flex items-center">
+										<span className="text-sm mr-2 font-bold">Giá khuyến mại:</span>
+										<span className="font-semibold text-red-400 text-lg">{FormatCurency(PriceSale)}</span>
+									</div>
+									<div className="flex items-center">
+										<span className="text-sm mr-2 font-bold">Giá niêm yết:</span>
+										<span className="line-through font-semibold">{FormatCurency(Price)}</span>
+									</div>
+									<span className="text-green-600 font-semibold">Tiết kiệm {FormatCurency(Price - PriceSale)} so với thị trường!</span>
+								</>
+							) : (
+								<div className="flex items-center">
+									<span className="text-sm mr-2 font-bold">Giá :</span>
+									<span className="font-semibold text-red-400 text-lg">{FormatCurency(Price)}</span>
+								</div>
+							)}
+							<div className="w-10/12 xs:mt-6">
+								<ButtonColorMain disabled={RemainingAmount <= 0} rounded="rounded-lg" padding="px-8 py-2 h-12 mt-6" onClick={handle_add_cart}>
+									Thêm vào giỏ hàng
+								</ButtonColorMain>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div className={`${cssSectionTop.right}`}>
-					<HeaderProduct Star={Star} css="xs:hidden xs:invisible block visible" ProductName={ProductName} CountEvaluate={evaluate.MetaData[0]?.CountEvaluate} CountComment={comment.MetaData[0]?.CountComment} />
-					<div className="flex justify-between flex-col mb-2">
-						<div className="description flex-1 mb-4">
-							<div className="flex items-center mb-3">
-								<span>Thương hiệu:</span>
-								<Link href={`/${ProductType === "phone" ? "dien-thoai" : "tablet"}?types=${ProductType}&brands=${Brand.BrandName[0]}&page=1`}>
-									<a className="inline-block" title={Brand.BrandName[0]}>
-										<div className="relative w-24 h-8">
-											<Image quality={qualityImage} objectFit="fill" alt={Brand.BrandName[0]} loading="eager" layout="fill" src={`${serverApi}${Brand.BrandImage[0]}`} />
-										</div>
-									</a>
-								</Link>
-							</div>
-							<div itemProp="description" className="pr-12">
-								<ul>
-									{Configuration.map((item, key) => {
-										const keyOf_Item = Object.keys(item)[0];
-										return (
-											<li key={key}>
-												<strong>{keyOf_Item}</strong>: {item[keyOf_Item]}
-											</li>
-										);
-									})}
-								</ul>
-							</div>
-							{/* màu sắc */}
-							{/* <div className='changer_color mt-4'>
+					<div className={`${cssSectionTop.right}`}>
+						<HeaderProduct Star={Star} css="xs:hidden xs:invisible block visible" ProductName={ProductName} CountEvaluate={evaluate.MetaData[0]?.CountEvaluate} CountComment={comment.MetaData[0]?.CountComment} />
+						<div className="flex justify-between flex-col mb-2">
+							<div className="description flex-1 mb-4">
+								<div className="flex items-center mb-3">
+									<span>Thương hiệu:</span>
+									<Link href={`/${ProductType === "phone" ? "dien-thoai" : "tablet"}?types=${ProductType}&brands=${Brand.BrandName[0]}&page=1`}>
+										<a className="inline-block" title={Brand.BrandName[0]}>
+											<div className="relative w-24 h-8">
+												<Image quality={qualityImage} objectFit="fill" alt={Brand.BrandName[0]} loading="eager" layout="fill" src={`${serverApi}${Brand.BrandImage[0]}`} />
+											</div>
+										</a>
+									</Link>
+								</div>
+								<div itemProp="description" className="pr-12">
+									<ul>
+										{Configuration.map((item, key) => {
+											const keyOf_Item = Object.keys(item)[0];
+											return (
+												<li key={key}>
+													<strong>{keyOf_Item}</strong>: {item[keyOf_Item]}
+												</li>
+											);
+										})}
+									</ul>
+								</div>
+								{/* màu sắc */}
+								{/* <div className='changer_color mt-4'>
 								<div>
 									<strong>Màu sắc:</strong>
 								</div>
@@ -722,35 +727,36 @@ function LinkProduct({ data, PAGE_OF_EVALUATE, PAGE_OF_COMMENT }) {
 									</li>
 								</ul>
 							</div> */}
-						</div>
-						<div>
-							<div className="service text-sm text-dark-gray mb-4">
-								<div className="border border-gray-100 rounded min-w-262px max-w-262px p-4">
-									<div className="text-base font-semibold mb-2 leading-6">Bảo hành</div>
-									<div>
-										<ul>
-											<li>
-												Bảo hành <strong>12 tháng tại PhoneX</strong>
-											</li>
-											<li>Đổi mới trong 15 ngày đầu tiên</li>
-										</ul>
+							</div>
+							<div>
+								<div className="service text-sm text-dark-gray mb-4">
+									<div className="border border-gray-100 rounded min-w-262px max-w-262px p-4">
+										<div className="text-base font-semibold mb-2 leading-6">Bảo hành</div>
+										<div>
+											<ul>
+												<li>
+													Bảo hành <strong>12 tháng tại PhoneX</strong>
+												</li>
+												<li>Đổi mới trong 15 ngày đầu tiên</li>
+											</ul>
+										</div>
 									</div>
 								</div>
-							</div>
-							{/* <div className='service text-sm text-dark-gray mb-4'>
+								{/* <div className='service text-sm text-dark-gray mb-4'>
 								<div className='border border-gray-100 rounded min-w-262px max-w-262px p-4'>
 									Giảm <span className='text-red-400 font-bold'>300.000&nbsp;₫</span> khi mua Microsoft Office 365 kèm laptop
 								</div>
 							</div> */}
+							</div>
+						</div>
+						<div className="pt-22px border-t border-gray-100 space-y-2 md:space-y-4">
+							<ProductOptions products={products_Options} active_Id={Id_Product} />
 						</div>
 					</div>
-					<div className="pt-22px border-t border-gray-100 space-y-2 md:space-y-4">
-						<ProductOptions products={products_Options} active_Id={Id_Product} />
-					</div>
-				</div>
-			</section>
-			<Section2 Describe={Describe} comment={comment} evaluate={evaluate} currentPage={PAGE_OF_EVALUATE} pageComment={PAGE_OF_COMMENT} url={Path} Star={Star} Id_Product={Id_Product} CountEvaluate={evaluate.MetaData[0].CountEvaluate} />
-		</main>
+				</section>
+				<Section2 Describe={Describe} comment={comment} evaluate={evaluate} currentPage={PAGE_OF_EVALUATE} pageComment={PAGE_OF_COMMENT} url={Path} Star={Star} Id_Product={Id_Product} CountEvaluate={evaluate.MetaData[0].CountEvaluate} />
+			</main>
+		</>
 	);
 }
 const getData = async (product_link, pageEvaluate, pageComment) => {
