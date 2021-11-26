@@ -547,6 +547,7 @@ function LinkProduct({ data, PAGE_OF_EVALUATE, PAGE_OF_COMMENT }) {
 				);
 			} catch (error) {}
 		};
+		updateViews();
 		return () => {
 			cancelTokenSource.cancel();
 		};
