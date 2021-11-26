@@ -12,7 +12,7 @@ import Modal from "@src/components/common/Modal";
 import Image from "next/image";
 import { serverApi, qualityImage } from "@src/config/constrant";
 import Link from "next/link";
-
+import Head from "next/head";
 const Table = props => {
 	const { data } = props;
 	const [show, setShow] = useState(false);
@@ -62,6 +62,9 @@ const Table = props => {
 	};
 	return (
 		<div className="container mx-auto px-4  max-w-3xl">
+			<Head>
+				<title>Lịch sử mua hàng</title>
+			</Head>
 			<div className="py-8">
 				<div className="flex flex-row mb-1 justify-between w-full">
 					<h2 className="text-2xl leading-tight">Lịch sử mua hàng</h2>

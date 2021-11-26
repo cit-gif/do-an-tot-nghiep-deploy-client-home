@@ -2,13 +2,16 @@ import React from "react";
 import axios from "@src/config/axios";
 import QuillHtmlToJsx from "@src/components/ProducLink/QuillHtmlToJsx";
 import Link from "next/link";
+import Head from "next/head";
 export default function PostDetails(props) {
 	const { data } = props;
 
 	return (
 		<div className="max-w-3xl mx-auto my-12">
 			<h2 className="text-3xl font-medium mb-4">{data.Title}</h2>
-
+			<Head>
+				<title>{data.Title}</title>
+			</Head>
 			<div>
 				<QuillHtmlToJsx html={data?.Content?.html || ""} />
 			</div>

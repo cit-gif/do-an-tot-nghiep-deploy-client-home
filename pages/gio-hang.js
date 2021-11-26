@@ -1,4 +1,5 @@
 import { useContext, useState, useEffect } from "react";
+import Head from "next/head";
 import { AppContext } from "@src/context";
 import { PlusLg, DashLg, Trash, ArrowLeft } from "react-bootstrap-icons";
 import formatCurency from "@src/helper/FormatCurency";
@@ -180,6 +181,9 @@ const ProductItem = props => {
 	const [imageLoaded, setImageLoaded] = useState(false);
 	return (
 		<div className="flex justify-between items-center xs:flex-col xs:items-stretch mt-6 pt-6 border-t">
+			<Head>
+				<title>Đặt hàng</title>
+			</Head>
 			<div className="flex items-center">
 				<div className="relative w-16 h-16 rounded border mr-2">
 					{!imageLoaded && <Image quality={qualityImage} objectFit="cover" loading="eager" layout="fill" src={`/default-image.jpg`} />}

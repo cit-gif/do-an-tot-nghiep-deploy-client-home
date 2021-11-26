@@ -7,6 +7,7 @@ import axios from "@src/config/axios";
 const Title_small = props => <span className="text-lg font-semibold mb-2">{props.children}</span>;
 const css_box = "p-4 flex flex-wrap w-full border rounded-lg mb-4";
 const css_flex = "my-3 w-1/2 sm:w-full xs:w-full px-4";
+import Head from "next/head";
 import BoxShadow from "@src/components/common/BoxShadow";
 import { useSnackbar } from "notistack";
 import { serverApi, qualityImage } from "@src/config/constrant";
@@ -117,6 +118,9 @@ const Profile = props => {
 	};
 	return (
 		<div className={css_box}>
+			<Head>
+				<title>Quản lí tài khoản</title>
+			</Head>
 			<div className="flex items-center flex-wrap w-full">
 				<div className={`${css_flex} flex items-center flex-wrap`}>
 					<div className="relative select-none mr-2 bg-primary flex flex-nowrap items-center justify-center w-16 h-16 rounded-full shadow-lg overflow-hidden">

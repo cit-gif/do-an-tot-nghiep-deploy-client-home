@@ -5,6 +5,7 @@ import { useContext } from "react";
 import { AppContext } from "@src/context";
 import { limit_product_in_search } from "@src/config/constrant";
 import Pagination from "@src/components/common/Pagination";
+import Head from "next/head";
 function Search({ data }) {
 	const products = data.data[0].Data;
 	const MetaData = data.data[0].MetaData[0];
@@ -13,6 +14,9 @@ function Search({ data }) {
 	if (products.length == 0) {
 		return (
 			<div className="container mx-auto">
+				<Head>
+					<title>Kết quả tìm kiếm: {query}</title>
+				</Head>
 				<div className="w-full my-60">
 					<h2 className="flex items-center text-2xl justify-center flex-col">
 						<span>Từ khóa tìm kiếm</span>
@@ -25,6 +29,9 @@ function Search({ data }) {
 	}
 	return (
 		<div className="container mx-auto">
+			<Head>
+				<title>Kết quả tìm kiếm: {query}</title>
+			</Head>
 			<div className="w-full my-8">
 				<h1 className="font-medium text-gray-500 my-12 text-3xl">
 					Tìm thấy <strong className="text-black font-semibold">{MetaData.CountProduct}</strong> kết quả với từ khóa <strong className="text-black font-semibold">"{query}"</strong>

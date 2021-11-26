@@ -8,6 +8,7 @@ import axios from "@src/config/axios";
 import TitleCate from "@src/components/common/TitleCate";
 import { limit_product_in_search } from "@src/config/constrant";
 import ViewedProducts from "@src/components/common/ViewedProducts";
+import Head from "next/head";
 export default function Home({ data }) {
 	const { check, bestsellingPhone, newestPhone, newestTablet, newestPost } = data;
 	// chia bài viết mới thành 2 danh sách
@@ -26,6 +27,9 @@ export default function Home({ data }) {
 	if (check) {
 		return (
 			<div className="container my-12 mx-auto">
+				<Head>
+					<title>Shop điện tử PhoneX</title>
+				</Head>
 				<div className="flex flex-wrap">
 					<ManipulatingSwiper data={newestPostSlice[1] || []} />
 					<News data={newestPostSlice[0] || []} />

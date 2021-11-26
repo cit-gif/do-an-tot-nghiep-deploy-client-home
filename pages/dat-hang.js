@@ -1,6 +1,7 @@
 import BoxShadow from "@src/components/common/BoxShadow";
 import TitleCate from "@src/components/common/TitleCate";
 const css_flex = "my-3 w-1/2 sm:w-full xs:w-full px-4";
+import Head from "next/head";
 import InputMain from "@src/components/common/InputMain";
 import formatCurency from "@src/helper/FormatCurency";
 import { useEffect, useState, useContext } from "react";
@@ -148,6 +149,9 @@ const Main_Jsx = props => {
 		const countProductsInTheOrder = user.Cart.filter(item => item.RemainingAmount[0] > 0 && item.RemainingAmount[0] >= item.Amount).length;
 		return (
 			<div className="flex flex-wrap my-4 w-full">
+				<Head>
+					<title>Đặt hàng</title>
+				</Head>
 				<div className="w-7/12 sm:w-full xs:w-full py-4 border">
 					<TitleSmall>Thông tin người nhận</TitleSmall>
 					<div className="w-full flex my-2 flex-wrap">

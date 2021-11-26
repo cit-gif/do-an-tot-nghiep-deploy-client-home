@@ -2,11 +2,15 @@ import Filter from "@src/components/Filter";
 import axios from "@src/config/axios";
 import { limit_product_in_search } from "@src/config/constrant";
 import { useState } from "react";
+import Head from "next/head";
 function Tablet({ data }) {
 	const [products, setProducts] = useState(data.data);
 	const [view, setView] = useState(data.view);
 	return (
 		<>
+			<Head>
+				<title>Tablet</title>
+			</Head>
 			<Filter arrayProducts={products[0].Data} setProducts={setProducts} view={view} setView={setView} metaData={products[0].MetaData} />
 		</>
 	);
