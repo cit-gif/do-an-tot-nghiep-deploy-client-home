@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "@src/config/axios";
 import QuillHtmlToJsx from "@src/components/ProducLink/QuillHtmlToJsx";
+import Link from "next/link";
 export default function PostDetails(props) {
 	const { data } = props;
 
@@ -11,6 +12,9 @@ export default function PostDetails(props) {
 			<div>
 				<QuillHtmlToJsx html={data?.Content?.html || ""} />
 			</div>
+			<Link href="/post">
+				<a className="outline-none px-8 py-4 block text-center rounded-lg font-medium whitespace-nowrap transition-all ease-out duration-300 shadow-sm  bg-primary hover:shadow-nextShadow text-white active:bg-primaryDark">Xem nhiều bài viết hơn</a>
+			</Link>
 		</div>
 	);
 }
