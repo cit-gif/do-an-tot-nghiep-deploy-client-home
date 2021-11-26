@@ -1,6 +1,6 @@
 import TitleCate from "../common/TitleCate";
 import FilterHeader from "./FilterHeader";
-import SlideBarFilter from "./SlideBarFIlter";
+import SlideBarFilter from "./SlideBarFilter";
 import ContainerPropduct from "@src/components/common/ContainerPropduct";
 import PaginationNotLink from "@src/components/common/Pagination/PaginationNotLink";
 import { limit_product_in_search } from "@src/config/constrant";
