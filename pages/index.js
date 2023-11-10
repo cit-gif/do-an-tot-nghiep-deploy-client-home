@@ -114,6 +114,7 @@ const getData = async () => {
 			});
 			data[urls[index].id] = res.data;
 		} catch (error) {
+			console.log("error: ", error);
 			data.check = false;
 		}
 	}
